@@ -1,8 +1,0 @@
-LocaleRegexURLResolver
-set_language
-i18n_patterns
-get_resolver
-url
-urlpatterns
-lru_cache
-settings

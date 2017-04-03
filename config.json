@@ -1,0 +1,6 @@
+{
+  "name": "Standard Debug Settings",
+  "secret_key": "dfrpg8zh&2w+j=!fk_p5z-xq8zoewxtuc5pw1nleje%#*e=e6ngw4sd",
+  "debug": true,
+  "allowed_hosts": ["*"]
+}

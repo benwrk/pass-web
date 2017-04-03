@@ -54,6 +54,9 @@
     <Folder Include="PASSweb\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="config.json">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

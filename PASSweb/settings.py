@@ -12,6 +12,18 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import posixpath
+import json
+
+CONFIGS = {}
+CONFIG_FILE = 'config.json'
+
+try:
+    with open(CONFIG_FILE) as config:
+        CONFIGS = json.load(config)
+        print('Using config file ' + CONFIG_FILE + ' (' + CONFIGS.get('name') + ')')
+except IOError:
+    print('[IOError] Configuration file (config.json) not found! Using default debug configurations.')
+    print('This is STRONGLY NOT RECOMMENDED in production, it can cause problems and various securty issues')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,12 +33,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'a9f3cfbf-9431-49a0-90b2-3cbd76f8ae36'
+SECRET_KEY = CONFIGS.get('secret_key', 'debug_secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = CONFIGS.get('debug', True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = CONFIGS.get('allowed_hosts', [])
 
 
 # Application definition
