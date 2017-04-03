@@ -20,10 +20,13 @@ CONFIG_FILE = 'config.json'
 try:
     with open(CONFIG_FILE) as config:
         CONFIGS = json.load(config)
-        print('Using config file ' + CONFIG_FILE + ' (' + CONFIGS.get('name') + ')')
-except IOError:
+        print('Using configuration file ' + CONFIG_FILE + ' (' + CONFIGS.get('name') + ')')
+        if CONFIGS.get('type') != 'application-configuration':
+            print('Mistyped configuration file detected, this may cause unexpected behaviors')
+            print('Please verify the configuration file format')
+except IOError: 
     print('[IOError] Configuration file (config.json) not found! Using default debug configurations.')
-    print('This is STRONGLY NOT RECOMMENDED in production, it can cause problems and various securty issues')
+    print('This is STRONGLY NOT RECOMMENDED, as it can cause problems and various securty issues!')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -51,11 +54,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -136,3 +141,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

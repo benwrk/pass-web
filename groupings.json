@@ -1,0 +1,100 @@
+{
+  "type": "grouping-configuration",
+  "name": "Placeholder Grouping",
+  "floors": [
+    {
+      "name": "Floor 1",
+      "groups": [
+        {
+          "name": "Group 1",
+          "wards": [
+            {
+              "name": "Ward 1",
+              "addresses": [
+                "1A:2B:3C:4D:5E:6F",
+                "2B:3C:4D:5E:6F:1F",
+                "3C:4D:5E:6F:1A:2F"
+              ]
+            },
+            {
+              "name": "Ward 2",
+              "addresses": [
+                "1A:2B:3C:4D:5E:60",
+                "2B:3C:4D:5E:6F:10",
+                "3C:4D:5E:6F:1A:20"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Group 2",
+          "wards": [
+            {
+              "name": "Ward 1",
+              "addresses": [
+                "1A:2B:3C:4D:5E:61",
+                "2B:3C:4D:5E:6F:11",
+                "3C:4D:5E:6F:1A:21"
+              ]
+            },
+            {
+              "name": "Ward 2",
+              "addresses": [
+                "1A:2B:3C:4D:5E:62",
+                "2B:3C:4D:5E:6F:12",
+                "3C:4D:5E:6F:1A:22"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Floor 2",
+      "groups": [
+        {
+          "name": "Group 1",
+          "wards": [
+            {
+              "name": "Ward 1",
+              "addresses": [
+                "1A:2B:3C:4D:5E:63",
+                "2B:3C:4D:5E:6F:13",
+                "3C:4D:5E:6F:1A:23"
+              ]
+            },
+            {
+              "name": "Ward 2",
+              "addresses": [
+                "1A:2B:3C:4D:5E:64",
+                "2B:3C:4D:5E:6F:14",
+                "3C:4D:5E:6F:1A:24"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Group 2",
+          "wards": [
+            {
+              "name": "Ward 1",
+              "addresses": [
+                "1A:2B:3C:4D:5E:65",
+                "2B:3C:4D:5E:6F:15",
+                "3C:4D:5E:6F:1A:25"
+              ]
+            },
+            {
+              "name": "Ward 2",
+              "addresses": [
+                "1A:2B:3C:4D:5E:66",
+                "2B:3C:4D:5E:6F:16",
+                "3C:4D:5E:6F:1A:26"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

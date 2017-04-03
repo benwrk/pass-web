@@ -242,7 +242,10 @@ ModelManifest.xml
 .fake/
 
 env/
+env3/
 *.sqlite3
 
 *.pyc
 __pycache__
+
+/static
