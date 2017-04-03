@@ -241,11 +241,18 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
+# Virtual environments
+# Python 2.x
 env/
+# Python 3.x
 env3/
+
+# SQLite Databases
 *.sqlite3
 
+# Compiled Python
 *.pyc
 __pycache__
 
+% Django Static Files
 /static
