@@ -1,0 +1,14 @@
+db
+VERSION
+conf
+template
+unicode_literals
+__version__
+__main__
+get_version
+contrib
+apps
+http
+forms
+shortcuts
+setup
