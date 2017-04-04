@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<select multiple>
+    {% for floor in groupings.floors %}
+    <option>{{floor.name}}</option>
+    {% endfor %}
+</select>
+
+<select multiple>
+    {% for floor in groupings.floors %}
+    <optgroup label="{{floor.name}}">
+        {% for group in floor.groups %}
+            <option>{{group.name}}</option>
+        {% endfor %}
+    </optgroup>
+    {% endfor %}
+</select>
+
+<select multiple>
+    {% for floor in groupings.floors %}
+        {% for group in floor.groups %}
+        <optgroup label="{{floor.name}} - {{group.name}}">
+            {% for ward in group.wards %}
+                <option>{{ward.name}}</option>
+            {% endfor %}
+        </optgroup>
+        {% endfor %}
+    {% endfor %}
+</select>
+
+<select multiple>
+    {% for floor in groupings.floors %}
+        {% for group in floor.groups %}
+            {% for ward in group.wards %}
+            <optgroup label="{{floor.name}} - {{group.name}} - {{ward.name}}">
+                {% for box in ward.boxes %}
+                    <option>{{box.name}} - {{box.address}}</option>
+                {% endfor %}
+            </optgroup>
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+</select>
+
+{% endblock %}

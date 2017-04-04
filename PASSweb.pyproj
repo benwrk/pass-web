@@ -77,6 +77,11 @@
     <Folder Include="PASSweb\" />
     <Folder Include="web\" />
     <Folder Include="web\migrations\" />
+    <Folder Include="web\static\" />
+    <Folder Include="web\static\web\css\" />
+    <Folder Include="web\static\web\fonts\" />
+    <Folder Include="web\static\web\js\" />
+    <Folder Include="web\static\web\" />
     <Folder Include="web\templates\" />
   </ItemGroup>
   <ItemGroup>
@@ -120,7 +125,27 @@
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\loginpartial.html" />
+    <Content Include="web\static\web\css\bootstrap-theme.css" />
+    <Content Include="web\static\web\css\bootstrap-theme.css.map" />
+    <Content Include="web\static\web\css\bootstrap-theme.min.css" />
+    <Content Include="web\static\web\css\bootstrap-theme.min.css.map" />
+    <Content Include="web\static\web\css\bootstrap.css" />
+    <Content Include="web\static\web\css\bootstrap.css.map" />
+    <Content Include="web\static\web\css\bootstrap.min.css" />
+    <Content Include="web\static\web\css\bootstrap.min.css.map" />
+    <Content Include="web\static\web\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="web\static\web\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="web\static\web\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="web\static\web\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="web\static\web\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="web\static\web\js\bootstrap.js" />
+    <Content Include="web\static\web\js\bootstrap.min.js" />
+    <Content Include="web\static\web\js\npm.js" />
     <Content Include="web\templates\index.html" />
+    <Content Include="web\templates\send.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="web\templates\layout.html" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env3\">

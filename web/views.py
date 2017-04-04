@@ -29,11 +29,11 @@ def process_filters(groupings, floors=None, groups=None, wards=None):
         ward_filters = str(wards).lower().split(',')
     
     for floor in groupings['floors']:
-        floor['selected'] = floor['name'].lower() in floor_filters
+        floor['selected'] = not floor_filters or floor['name'].lower() in floor_filters
         for group in floor['groups']:
-            group['selected'] = group['name'].lower() in group_filters
+            group['selected'] = not group_filters or group['name'].lower() in group_filters
             for ward in group['wards']:
-                ward['selected'] = ward['name'].lower() in ward_filters
+                ward['selected'] = not ward_filters or ward['name'].lower() in ward_filters
 
 def get_boxes_from_groupings(groupings):
     boxes = []
@@ -48,10 +48,11 @@ def send(request):
     """Renders the send page."""
     assert isinstance(request, HttpRequest)
     groupings = read_grouping_config()
-    process_filters(groupings)
+    process_filters(groupings, request.GET.get('floors'), request.GET.get('groups'), request.GET.get('wards'))
     if request.method == 'GET':
-        return render(request, 'index.html', { 
+        return render(request, 'send.html', { 
             'boxes': get_boxes_from_groupings(groupings),
+            'groupings_json': json.dumps(groupings),
             'groupings': groupings
          })
     elif request.method == 'POST':
