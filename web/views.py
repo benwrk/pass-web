@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from PASSweb import settings
 import json
-from django.http.response import HttpResponse
 
 def read_grouping_config():
     groupings = {}
@@ -17,37 +16,44 @@ def read_grouping_config():
     return groupings
 
 def process_filters(groupings, floors=None, groups=None, wards=None):
-    filtered_groupings = dict(groupings)
-
-    if floors:
-        floor_filters = str(floors).lower().split(',')
-        filtered_groupings['floors'][:] = [value for value in filtered_groupings['floors'] if str(value['name']).lower() in floor_filters]
     
+    floor_filters = None
     group_filters = None
     ward_filters = None
-
-    if groups or wards:
-        if groups:
-            group_filters = str(groups).lower().split(',')
-        if wards:
-            ward_filters = str(wards).lower().split(',')
-        for floor in filtered_groupings['floors']:
-            if groups:
-                floor['groups'][:] = [value for value in floor['groups'] if str(value['name']).lower() in group_filters]
-            if wards:
-                for group in floor['groups']:
-                    group['wards'][:] = [value for value in group['wards'] if str(value['name']).lower() in ward_filters]
     
-    filtered_groupings['filtered'] = True
-    return filtered_groupings
+    if floors:
+        floor_filters = str(floors).lower().split(',')
+    if groups:
+        group_filters = str(groups).lower().split(',')
+    if wards:
+        ward_filters = str(wards).lower().split(',')
+    
+    for floor in groupings['floors']:
+        floor['selected'] = floor['name'].lower() in floor_filters
+        for group in floor['groups']:
+            group['selected'] = group['name'].lower() in group_filters
+            for ward in group['wards']:
+                ward['selected'] = ward['name'].lower() in ward_filters
+
+def get_boxes_from_groupings(groupings):
+    boxes = []
+    for floor in [value for value in groupings['floors'] if value['selected']]:
+        for group in [value for value in floor['groups'] if value['selected']]:
+            for ward in [value for value in group['wards'] if value['selected']]:
+                for box in ward['boxes']:
+                    boxes.append(box)
+    return boxes
 
 def send(request):
     """Renders the send page."""
     assert isinstance(request, HttpRequest)
-    
+    groupings = read_grouping_config()
+    process_filters(groupings)
     if request.method == 'GET':
-        groupings = process_filters(read_grouping_config(), request.GET['floors'], request.GET['groups'], request.GET['wards'])
-        return render(request, 'index.html', { 'content': groupings })
+        return render(request, 'index.html', { 
+            'boxes': get_boxes_from_groupings(groupings),
+            'groupings': groupings
+         })
     elif request.method == 'POST':
         return HttpResponse(status=404)
 
