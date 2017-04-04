@@ -3,14 +3,20 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <link href="{% static 'web/css/font-raleway.css' %}" rel="stylesheet" />
     <link href="{% static 'web/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'web/css/web.css' %}" rel="stylesheet" />
     <meta charset="utf-8" />
     <title>PASS Web Service</title>
 </head>
 <body>
-    <div id="container">
-        {% block content %}
-        {% endblock %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
     </div>
 
     <script src="{% static 'web/js/jquery-3.2.0.min.js' %}"></script>
