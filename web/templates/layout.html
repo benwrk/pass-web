@@ -10,14 +10,46 @@
     <title>PASS Web Service</title>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                {% block content %}
-                {% endblock %}
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <div class="masthead clearfix">
+            <div class="inner">
+              <img class="navbar-left" height="32" src="{% static 'web/img/svg/logo.svg' %}" /><h3 class="nav-brand masthead-brand">&nbsp;• Public Announcement</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li {% if nav.lower == 'broadcast' %}class="active"{% endif %}><a href="#">Broadcast</a></li>
+                  <li {% if nav.lower == 'selective' %}class="active"{% endif %}><a href="#">Selective</a></li>
+                  
+                </ul>
+              </nav>
             </div>
+          </div>
+
+          <div class="inner cover">
+              {% block content %}
+              {% endblock %}
+            <!--
+            <h1 class="cover-heading">Cover your page.</h1>
+            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+            <p class="lead">
+              <a href="#" class="btn btn-lg btn-default">Learn more</a>
+            </p>
+            -->
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>© AlfaThai</p>
+            </div>
+          </div>
+
         </div>
+
+      </div>
+
     </div>
+
 
     <script src="{% static 'web/js/jquery-3.2.0.min.js' %}"></script>
     <script src="{% static 'web/js/bootstrap.min.js' %}"></script>

@@ -83,11 +83,12 @@
     <Folder Include="web\static\" />
     <Folder Include="web\static\web\css\" />
     <Folder Include="web\static\web\fonts\" />
-    <Folder Include="web\static\web\images\svg\" />
+    <Folder Include="web\static\web\img\svg\" />
     <Folder Include="web\static\web\js\" />
     <Folder Include="web\static\web\" />
-    <Folder Include="web\static\web\images\" />
+    <Folder Include="web\static\web\img\" />
     <Folder Include="web\templates\" />
+    <Folder Include="web\templates\blocks\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore">
@@ -130,6 +131,9 @@
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\loginpartial.html" />
+    <Content Include="web\static\web\css\bootstrap-select.css" />
+    <Content Include="web\static\web\css\bootstrap-select.css.map" />
+    <Content Include="web\static\web\css\bootstrap-select.min.css" />
     <Content Include="web\static\web\css\bootstrap-theme.css" />
     <Content Include="web\static\web\css\bootstrap-theme.css.map" />
     <Content Include="web\static\web\css\bootstrap-theme.min.css" />
@@ -144,7 +148,10 @@
     <Content Include="web\static\web\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="web\static\web\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="web\static\web\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="web\static\web\images\svg\logo.svg" />
+    <Content Include="web\static\web\img\svg\logo.svg" />
+    <Content Include="web\static\web\js\bootstrap-select.js" />
+    <Content Include="web\static\web\js\bootstrap-select.js.map" />
+    <Content Include="web\static\web\js\bootstrap-select.min.js" />
     <Content Include="web\static\web\js\bootstrap.js" />
     <Content Include="web\static\web\js\bootstrap.min.js" />
     <Content Include="web\static\web\js\jquery-3.2.0.js" />
@@ -152,7 +159,7 @@
     <Content Include="web\static\web\js\npm.js" />
     <Content Include="web\static\web\css\web.css" />
     <Content Include="web\templates\index.html" />
-    <Content Include="web\templates\send.html">
+    <Content Include="web\templates\blocks\send_selective.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="web\templates\layout.html" />

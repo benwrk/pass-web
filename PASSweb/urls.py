@@ -40,7 +40,7 @@ urlpatterns = [
     #    name='logout'),
     
     #url(r'^$', web.views.home, name='home'),
-    url(r'^send$', web.views.send, name='send')
+    url(r'^send_selective$', web.views.send_selective, name='send_selective')
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

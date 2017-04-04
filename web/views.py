@@ -44,16 +44,17 @@ def get_boxes_from_groupings(groupings):
                     boxes.append(box)
     return boxes
 
-def send(request):
+def send_selective(request):
     """Renders the send page."""
     assert isinstance(request, HttpRequest)
     groupings = read_grouping_config()
     process_filters(groupings, request.GET.get('floors'), request.GET.get('groups'), request.GET.get('wards'))
     if request.method == 'GET':
-        return render(request, 'send.html', { 
+        return render(request, 'blocks/send_selective.html', { 
             'boxes': get_boxes_from_groupings(groupings),
             'groupings_json': json.dumps(groupings),
-            'groupings': groupings
+            'groupings': groupings,
+            'nav': 'selective'
          })
     elif request.method == 'POST':
         return HttpResponse(status=404)

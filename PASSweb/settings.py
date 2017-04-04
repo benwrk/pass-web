@@ -77,7 +77,7 @@ ROOT_URLCONF = 'PASSweb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ '/templatetags/' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
