@@ -1,6 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 222.03 44">
   <defs>
-    <style>.cls-1{fill:#0965a1;}.cls-2{fill:#08659f;}</style>
+    <!--<style>.cls-1{fill:#0965a1;}.cls-2{fill:#08659f;}</style>-->
+    <style>
+      .cls-1 {
+      fill: #FFFFFF;
+      }
+      .cls-2 {
+      fill: #FFFFFF;
+      }
+    </style>
   </defs>
   <title>Asset 1</title>
   <g id="Layer_2" data-name="Layer 2">
