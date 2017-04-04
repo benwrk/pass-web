@@ -1,6 +1,6 @@
 import select
 import socket
-import pass_settings
+import pass_server_settings
 import netifaces as ni
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
