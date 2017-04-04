@@ -49,7 +49,7 @@ ALLOWED_HOSTS = CONFIGS.get('allowed_hosts', [])
 INSTALLED_APPS = [
     #'app',
     'web',
-    'api',
+    #'api',
     # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',

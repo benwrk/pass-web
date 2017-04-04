@@ -31,8 +31,14 @@
   <ItemGroup>
     <Compile Include="api\admin.py" />
     <Compile Include="api\apps.py" />
+    <Compile Include="api\messaging.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="api\migrations\__init__.py" />
     <Compile Include="api\models.py" />
+    <Compile Include="api\serializers.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="api\tests.py" />
     <Compile Include="api\views.py" />
     <Compile Include="api\__init__.py" />
