@@ -140,6 +140,8 @@
     <Content Include="web\static\web\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="web\static\web\js\bootstrap.js" />
     <Content Include="web\static\web\js\bootstrap.min.js" />
+    <Content Include="web\static\web\js\jquery-3.2.0.js" />
+    <Content Include="web\static\web\js\jquery-3.2.0.min.js" />
     <Content Include="web\static\web\js\npm.js" />
     <Content Include="web\templates\index.html" />
     <Content Include="web\templates\send.html">
