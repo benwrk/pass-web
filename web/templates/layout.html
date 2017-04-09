@@ -6,6 +6,7 @@
     <link href="{% static 'web/css/font-raleway.css' %}" rel="stylesheet" />
     <link href="{% static 'web/css/bootstrap.min.css' %}" rel="stylesheet" />
     <link href="{% static 'web/css/web.css' %}" rel="stylesheet" />
+    <link href="{% static 'web/css/bootstrap-select.min.css' %}" rel="stylesheet" />
     <meta charset="utf-8" />
     <title>PASS Web Service</title>
 </head>
@@ -15,12 +16,11 @@
         <div class="cover-container">
           <div class="masthead clearfix">
             <div class="inner">
-              <img class="navbar-left" height="32" src="{% static 'web/img/svg/logo.svg' %}" /><h3 class="nav-brand masthead-brand">&nbsp;• Public Announcement</h3>
+              <img class="navbar-left" height="32" src="{% static 'web/img/svg/logo.svg' %}" /><h3 class="nav-brand masthead-brand">&nbsp; • Public Announcement</h3>
               <nav>
                 <ul class="nav masthead-nav">
                   <li {% if nav.lower == 'broadcast' %}class="active"{% endif %}><a href="#">Broadcast</a></li>
                   <li {% if nav.lower == 'selective' %}class="active"{% endif %}><a href="#">Selective</a></li>
-                  
                 </ul>
               </nav>
             </div>
@@ -53,5 +53,6 @@
 
     <script src="{% static 'web/js/jquery-3.2.0.min.js' %}"></script>
     <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'web/js/bootstrap-select.min.js' %}"></script>
 </body>
 </html>
