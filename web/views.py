@@ -54,7 +54,10 @@ def send_selective(request):
             'boxes': get_boxes_from_groupings(groupings),
             'groupings_json': json.dumps(groupings),
             'groupings': groupings,
-            'nav': 'selective'
+            'nav': 'selective',
+            'layout': {
+                'page_name': 'Broadcast'
+            }
          })
     elif request.method == 'POST':
         return HttpResponse(status=404)
