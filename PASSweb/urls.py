@@ -4,6 +4,7 @@ Definition of urls for PASSweb.
 
 from datetime import datetime
 from django.conf.urls import url
+from django.views.generic import RedirectView
 import django.contrib.auth.views
 
 import app.forms
@@ -39,8 +40,10 @@ urlpatterns = [
     #    },
     #    name='logout'),
     
-    #url(r'^$', web.views.home, name='home'),
-    url(r'^send_selective$', web.views.send_selective, name='send_selective')
+    url(r'^$', RedirectView.as_view(url='/send_broadcast'), name='home'),
+    url(r'^send_broadcast$', web.views.send_broadcast, name='send_broadcast'),
+    url(r'^send_selective$', web.views.send_selective, name='send_selective'),
+    url(r'^send_direct$', web.views.send_direct, name='send_direct')
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

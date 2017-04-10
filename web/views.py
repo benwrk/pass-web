@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 from PASSweb import settings
 import json
+from django.http.response import HttpResponseRedirect
 
 def read_grouping_config():
     groupings = {}
@@ -22,18 +23,18 @@ def process_filters(groupings, floors=None, groups=None, wards=None):
     ward_filters = None
     
     if floors:
-        floor_filters = str(floors).lower().split(',')
+        floor_filters = str(floors).lower().replace('+', ' ').split(',')
     if groups:
-        group_filters = str(groups).lower().split(',')
+        group_filters = str(groups).lower().replace('+', ' ').split(',')
     if wards:
-        ward_filters = str(wards).lower().split(',')
+        ward_filters = str(wards).lower().replace('+', ' ').split(',')
     
     for floor in groupings['floors']:
         floor['selected'] = not floor_filters or floor['name'].lower() in floor_filters
         for group in floor['groups']:
-            group['selected'] = not group_filters or group['name'].lower() in group_filters
+            group['selected'] = not group_filters or (floor['name'] + ' - ' + group['name']).lower() in group_filters
             for ward in group['wards']:
-                ward['selected'] = not ward_filters or ward['name'].lower() in ward_filters
+                ward['selected'] = not ward_filters or (floor['name'] + ' - ' + group['name'] + ' - ' + ward['name']).lower() in ward_filters
 
 def get_boxes_from_groupings(groupings):
     boxes = []
@@ -45,7 +46,7 @@ def get_boxes_from_groupings(groupings):
     return boxes
 
 def send_selective(request):
-    """Renders the send page."""
+    """Renders the selective send page."""
     assert isinstance(request, HttpRequest)
     groupings = read_grouping_config()
     process_filters(groupings, request.GET.get('floors'), request.GET.get('groups'), request.GET.get('wards'))
@@ -55,11 +56,17 @@ def send_selective(request):
             'groupings_json': json.dumps(groupings),
             'groupings': groupings,
             'nav': 'selective',
+            'step': int(request.GET.get('step', '1')),
             'layout': {
-                'page_name': 'Broadcast'
+                'active_nav': 'Selective',
+                'page_name': 'Selective'
             }
          })
-    elif request.method == 'POST':
-        return HttpResponse(status=404)
 
+def send_direct(request):
+    """Renders the send page. """
+    return HttpResponse(404);
+
+def send_broadcast(request):
+    return HttpResponse(404);
     
