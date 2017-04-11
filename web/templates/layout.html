@@ -68,7 +68,7 @@
 
             <ul class="nav">
                 <li {% if layout.active_nav.lower == 'broadcast' %}class="active"{% endif %}>
-                    <a href="#">
+                    <a href="{% url 'send_broadcast' %}">
                         <i class="pe-7s-speaker"></i>
                         <p>Broadcast</p>
                     </a>
@@ -137,7 +137,7 @@
                         </li>
                     </ul>
                     -->
-
+                    
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a href="#">
@@ -242,23 +242,6 @@
 <script src="{% static 'assets/js/demo.js' %}"></script>
 
 <script src="{% static 'assets/js/light-bootstrap-dashboard.js' %}"></script>
-
-<script type="text/javascript">
-    //$(document).ready(function(){
-
-    //    demo.initChartist();
-
-    //    $.notify({
-    //        icon: 'pe-7s-gift',
-    //        message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
-
-    //    },{
-    //        type: 'info',
-    //        timer: 4000
-    //    });
-
-    //});
-</script>
 
 </body>
 

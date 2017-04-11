@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from PASSweb import settings
 import json
 from django.http.response import HttpResponseRedirect
+from django.utils.http import urlencode
 
 def read_grouping_config():
     groupings = {}
@@ -66,12 +67,24 @@ def send_selective(request):
          })
 
 def send_direct(request):
-    """Renders the direct send page. """
-    return HttpResponse(404)
+    """Renders the direct send page."""
+    assert isinstance(request, HttpRequest)
+    
 
-
-def send_broadcast(request):
-    return HttpResponse(404)
+def send_broadcast(request):    
+    """Renders the broadcast page."""
+    groupings = read_grouping_config()
+    
+    if request.method == 'GET':
+        return render(request, 'blocks/send.html', { 
+            'boxes': get_boxes_from_groupings(groupings),
+            'layout': {
+                'active_nav': 'Broadcast',
+                'page_name': 'Broadcast',
+                'extra_title': 'Broadcast Message',
+                'send_success': bool(int(request.GET.get('success', '0')))
+            }
+         })
 
 
 def send(request):
@@ -84,7 +97,20 @@ def send(request):
             'boxes': get_boxes_from_groupings(groupings, request.GET.get('boxes', '').lower().split(',')) if 'boxes' in request.GET else None,
             'layout': {
                 'active_nav': 'Send',
-                'page_name': 'Send'
+                'page_name': 'Send',
+                'extra_title': 'Message'
             }
          })
 
+def send_service_call(request):
+    assert isinstance(request, HttpRequest)
+    
+    if request.is_ajax() and request.method == 'POST':
+        # ImplServiceCall
+        print(json.loads(request.body.decode('utf-8')))
+        return HttpResponse("OK")
+
+
+#def home(request):
+#    assert isinstance(request, HttpRequest)
+#    return HttpResponseRedirect('/send_broadcast' + (('?' + urlencode(params)) if params else ''))

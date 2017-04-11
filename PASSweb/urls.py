@@ -44,7 +44,8 @@ urlpatterns = [
     url(r'^send$', web.views.send, name='send'),
     url(r'^send_broadcast$', web.views.send_broadcast, name='send_broadcast'),
     url(r'^send_selective$', web.views.send_selective, name='send_selective'),
-    url(r'^send_direct$', web.views.send_direct, name='send_direct')
+    url(r'^send_direct$', web.views.send_direct, name='send_direct'),
+    url(r'^send_service_call$', web.views.send_service_call, name='send_service_call')
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

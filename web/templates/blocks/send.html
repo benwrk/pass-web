@@ -6,14 +6,12 @@
             <div class="header">
                 <div class="row">
                     <div class="col-xs-6">
-                        <h4 class="title">Send Summary</h4>
-                        <p class="category">Sending message</p>
+                        <h4 class="title">{{ layout.extra_title }}</h4>
+                        <p class="category">Summary</p>
                     </div>
                     <div class="col-xs-6">
-                        {% if step == 5 %}
-                            <button type="button" class="btn btn-primary pull-right" onclick="next({{step}});">Send!</button>
-                            <button type="button" class="btn btn-danger pull-right" onclick="window.location.href = '{% url 'send_selective' %}'" style="margin-right: 4px;">Reset</button>
-                        {% endif %}
+                        <button type="button" class="btn btn-primary pull-right" onclick="send()">Send!</button>
+                        <button type="button" class="btn btn-danger pull-right" onclick="window.location.href = '{% url 'home' %}'" style="margin-right: 4px;">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -41,10 +39,10 @@
                                 <div class="input-group">
                                     <div class="btn-group btn-group-justified btn-group-sm" id="message-show-as" data-toggle="buttons">
                                         <label class="btn btn-primary active" style="font-weight: 700;">
-                                            <input type="radio" autocomplete="off" checked /> Toast
+                                            <input type="radio" name="show-as" autocomplete="off" checked value="toast" onchange="if (this.checked) $('#message-show-for').removeAttr('disabled')" /> Toast
                                         </label>
                                         <label class="btn btn-primary" style="font-weight: 700;">
-                                            <input type="radio" autocomplete="off" />  Popup
+                                            <input type="radio" name="show-as" autocomplete="off" value="popup" onchange="if (this.checked) $('#message-show-for').attr('disabled', true)" />  Popup
                                         </label>
                                     </div>
                                 </div>
@@ -52,8 +50,8 @@
                             <div class="col-md-6">
                                 <label for="message-show-time">Show for (Toast only)</label><br />
                                 <div class="input-group input-group-sm" id="message-show-time">
-                                    <input id="message-show-for" class="form-control" type="number" max="15" placeholder="1-15 Seconds  (Default: 10)" />
-                                    <span class="input-group-addon">Seconds</span>                                        
+                                    <input id="message-show-for" class="form-control" type="number" max="15" placeholder="1-15 seconds  (default: 10)" />
+                                    <span class="input-group-addon">seconds</span>                                        
                                 </div>
                             </div>
                         </div>
@@ -65,11 +63,101 @@
 </div>
 
 <script type="text/javascript">
+    var sendURL = '{% url 'send_service_call' %}';
+    var successURL = '{% url 'send_broadcast' %}' + '?success=1';
+    var csrfToken = '{{ csrf_token }}';
     $(document).ready(function () {
         $('#box-addresses').select2({
             tags: true
         });
+
+        if ('{{layout.send_success}}'.toLowerCase() === 'true') {
+            notifySuccess();
+        }
     });
+</script>
+
+<script type="text/javascript">
+    function notifySuccess() {
+        $.notify({
+            icon: 'pe-7s-info',
+            message: 'Message Sent!'
+        }, {
+            type: 'info',
+            timer: 2000
+        });
+    }
+
+    function notifyError(message) {
+        $.notify({
+            icon: 'pe-7s-close-circle',
+            message: message
+        }, {
+            type: 'danger',
+            timer: 2000
+        });
+    }
+    
+    function send() {
+        var selected = $('#box-addresses :selected');
+        var addresses = [];
+        var inputError = false;
+
+        for (var i = 0; i < selected.length; i++) {
+            addresses.push(selected[i].value);
+        }
+
+        var message = $('#message-input').val().trim();
+
+        if (message == '') {
+            notifyError('Message cannot be blank!');
+            inputError= true;
+        }
+
+        var durationString = $('#message-show-for').val().trim();
+
+        var duration = 10;
+
+        if (!isNaN(parseInt(durationString))) {
+            duration = parseInt(durationString)
+            if (duration < 1 || duration > 15) {
+                notifyError('Invalid duration! Must be between 1 to 15 seconds.');
+                inputError = true;
+            }
+        }
+
+        var messageOptions = {
+            display: $("input[name='show-as']:checked").val(),
+            duration: duration
+        };
+
+        var postData = {
+            message: message,
+            messageOptions: messageOptions,
+            addresses: addresses
+        };
+
+        if (!inputError) {
+            $.ajax({
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('X-CSRFToken', csrfToken);
+                },
+                url: sendURL,
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(postData),
+                processData: false,
+                success: function() {
+                    window.location.href = successURL;
+                },
+                error: function() {
+                    notifyError('Unable to send: Server error!');
+                }
+            });
+        } else {
+            notifyError('Message not sent!');
+        }
+    }    
 </script>
 
 
