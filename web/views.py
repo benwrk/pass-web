@@ -36,12 +36,15 @@ def process_filters(groupings, floors=None, groups=None, wards=None):
             for ward in group['wards']:
                 ward['selected'] = not ward_filters or (floor['name'] + ' - ' + group['name'] + ' - ' + ward['name']).lower() in ward_filters
 
-def get_boxes_from_groupings(groupings):
+def get_boxes_from_groupings(groupings, addresses=None):
     boxes = []
-    for floor in [value for value in groupings['floors'] if value['selected']]:
-        for group in [value for value in floor['groups'] if value['selected']]:
-            for ward in [value for value in group['wards'] if value['selected']]:
-                for box in ward['boxes']:
+    for floor in [value for value in groupings['floors'] if not 'selected' in value or value['selected']]:
+        for group in [value for value in floor['groups'] if not 'selected' in value or value['selected']]:
+            for ward in [value for value in group['wards'] if not 'selected' in value or  value['selected']]:
+                for box in [value for value in ward['boxes'] if not addresses or value['address'].lower() in addresses]:
+                    box['floor_name'] = floor['name']
+                    box['group_name'] = group['name']
+                    box['ward_name'] = ward['name']
                     boxes.append(box)
     return boxes
 
@@ -52,8 +55,7 @@ def send_selective(request):
     process_filters(groupings, request.GET.get('floors'), request.GET.get('groups'), request.GET.get('wards'))
     if request.method == 'GET':
         return render(request, 'blocks/send_selective.html', { 
-            'boxes': get_boxes_from_groupings(groupings),
-            'groupings_json': json.dumps(groupings),
+            'boxes': get_boxes_from_groupings(groupings, request.GET.get('boxes', '').lower().split(',')) if 'boxes' in request.GET else None,
             'groupings': groupings,
             'nav': 'selective',
             'step': int(request.GET.get('step', '1')),
@@ -64,9 +66,25 @@ def send_selective(request):
          })
 
 def send_direct(request):
-    """Renders the send page. """
-    return HttpResponse(404);
+    """Renders the direct send page. """
+    return HttpResponse(404)
+
 
 def send_broadcast(request):
-    return HttpResponse(404);
-    
+    return HttpResponse(404)
+
+
+def send(request):
+    """Renders the send page."""
+    assert isinstance(request, HttpRequest)
+    groupings = read_grouping_config()
+
+    if request.method == 'GET':
+        return render(request, 'blocks/send.html', { 
+            'boxes': get_boxes_from_groupings(groupings, request.GET.get('boxes', '').lower().split(',')) if 'boxes' in request.GET else None,
+            'layout': {
+                'active_nav': 'Send',
+                'page_name': 'Send'
+            }
+         })
+

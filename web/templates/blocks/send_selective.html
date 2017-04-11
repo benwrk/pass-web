@@ -1,19 +1,18 @@
-{% extends 'layout-new.html' %}
-
+{% extends 'layout.html' %}
 {% block content %}
     <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <div class="header">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-xs-6">
                             <h4 class="title">Step 1</h4>
                             <p class="category">Select floors</p>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-xs-6">
                             {% if step == 1 %}
                                 <button type="button" class="btn btn-primary pull-right" onclick="next({{step}});">Confirm</button>
-                                <button type="button" class="btn btn-danger pull-right" onclick="window.location.href = '/send_selective'" style="margin-right: 4px;">Reset</button>
+                                <button type="button" class="btn btn-danger pull-right" onclick="window.location.href = '{% url 'send_selective' %}'" style="margin-right: 4px;">Reset</button>
                             {% endif %}
                         </div>
                     </div>
@@ -36,14 +35,14 @@
             <div class="card">
                 <div class="header">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-xs-6">
                             <h4 class="title">Step 2</h4>
                             <p class="category">Select groups</p>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-xs-6">
                             {% if step == 2 %}
                                 <button type="button" class="btn btn-primary pull-right" onclick="next({{step}});">Confirm</button>
-                                <button type="button" class="btn btn-danger pull-right" onclick="window.location.href = '/send_selective'" style="margin-right: 4px;">Reset</button>
+                                <button type="button" class="btn btn-danger pull-right" onclick="window.location.href = '{% url 'send_selective' %}'" style="margin-right: 4px;">Reset</button>
                             {% endif %}
                         </div>
                     </div>
@@ -71,14 +70,14 @@
             <div class="card">
                 <div class="header">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-xs-6">
                             <h4 class="title">Step 3</h4>
                             <p class="category">Select wards</p>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-xs-6">
                             {% if step == 3 %}
                                 <button type="button" class="btn btn-primary pull-right" onclick="next({{step}});">Confirm</button>
-                                <button type="button" class="btn btn-danger pull-right" onclick="window.location.href = '/send_selective'" style="margin-right: 4px;">Reset</button>
+                                <button type="button" class="btn btn-danger pull-right" onclick="window.location.href = '{% url 'send_selective' %}'" style="margin-right: 4px;">Reset</button>
                             {% endif %}
                         </div>
                     </div>
@@ -110,14 +109,14 @@
             <div class="card">
                 <div class="header">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-xs-6">
                             <h4 class="title">Step 4</h4>
                             <p class="category">Select boxes</p>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-xs-6">
                             {% if step == 4 %}
                                 <button type="button" class="btn btn-primary pull-right" onclick="next({{step}});">Confirm</button>
-                                <button type="button" class="btn btn-danger pull-right" onclick="window.location.href = '/send_selective'" style="margin-right: 4px;">Reset</button>
+                                <button type="button" class="btn btn-danger pull-right" onclick="window.location.href = '{% url 'send_selective' %}'" style="margin-right: 4px;">Reset</button>
                             {% endif %}
                         </div>
                     </div>
@@ -152,7 +151,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var floorsDualListBox = $(".duallistbox-selectors").bootstrapDualListbox({
+        var dualListBoxes = $(".duallistbox-selectors").bootstrapDualListbox({
             nonSelectedListLabel: "Unselected",
             selectedListLabel: "Selected",
             moveAllLabel: 'Select all',
@@ -186,31 +185,28 @@
         switch (step) {
             case 1:
                 var selectBox = $('#floors-select option:selected');
-                var newLocation = '/send_selective?step=2&floors=' + createQuery(selectBox);
-                window.location.href = newLocation;                
+                var newLocation = '{% url 'send_selective' %}?step=2&floors=' + createQuery(selectBox);
                 break;
             case 2:
                 var selectBox = $('#groups-select option:selected');
-                var newLocation = '/send_selective?step=3&groups=' + createQuery(selectBox);
-                window.location.href = newLocation;
+                var newLocation = '{% url 'send_selective' %}?step=3&groups=' + createQuery(selectBox);
                 break;
             case 3:
                 var selectBox = $('#wards-select option:selected');
-                var newLocation = '/send_selective?step=4&wards=' + createQuery(selectBox);
-                window.location.href = newLocation;
+                var newLocation = '{% url 'send_selective' %}?step=4&wards=' + createQuery(selectBox);
                 break;
             case 4:
                 var selectBox = $('#boxes-select option:selected');
-                var newLocation = '/send_selective?step=5&boxes=';
+                var newLocation = '{% url 'send' %}?&boxes=';
                 for (var i = 0; i < selectBox.length; i++) {
                     newLocation += selectBox[i].text.split('-')[4].trim().replace(/ /g, '+');
                     if (i != selectBox.length - 1) {
                         newLocation += ','
                     }
-                }
-                window.location.href = newLocation;
+                }                
                 break;
         }
+        window.location.href = newLocation;
     }
 </script>
 
