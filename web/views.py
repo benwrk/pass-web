@@ -107,6 +107,7 @@ def send_service_call(request):
     
     if request.is_ajax() and request.method == 'POST':
         # ImplServiceCall
+        body = request.body
         print(json.loads(request.body.decode('utf-8')))
         return HttpResponse("OK")
 

@@ -3,21 +3,21 @@
   "name": "Placeholder Grouping",
   "floors": [
     {
-      "name": "G Floor",
+      "name": "Floor 1",
       "groups": [
         {
-          "name": "Group A",
+          "name": "Group 1",
           "wards": [
             {
               "name": "Ward 1",
               "boxes": [
                 {
                   "name": "Box 1",
-                  "address": "ACDBDA42E9FC"
+                  "address": "1A2B3C4D5E00"
                 },
                 {
                   "name": "Box 2",
-                  "address": "ACDBDA42EC78"
+                  "address": "1A2B3C4D5E01"
                 },
                 {
                   "name": "Box 3",

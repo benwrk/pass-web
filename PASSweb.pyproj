@@ -4,8 +4,8 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>PASSweb</Name>
     <RootNamespace>PASSweb</RootNamespace>
-    <InterpreterId>{c24f2930-6846-4180-a30f-5b444f670b5a}</InterpreterId>
-    <InterpreterVersion>2.7</InterpreterVersion>
+    <InterpreterId>{a043ffb7-c9c2-4176-86e7-03927540a6e0}</InterpreterId>
+    <InterpreterVersion>3.5</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -119,6 +119,7 @@
     <Content Include="config.json">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="grouping-default.json" />
     <Content Include="grouping.json">
       <SubType>Code</SubType>
     </Content>
