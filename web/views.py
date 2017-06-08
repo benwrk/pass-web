@@ -1,9 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
-from PASSweb import settings
-import json
 from django.http.response import HttpResponseRedirect
 from django.utils.http import urlencode
+from web.mapping_server import MappingServer
+from PASSweb import settings
+import json
+import socket
+
+mapper = MappingServer(settings.CONFIGS.get('client_broadcasting_port', 1256), settings.CONFIGS.get('max_udp_size', 1024))
+mapper.run()
+client_listening_port = settings.CONFIGS.get('client_listening_port', 1257)
 
 def read_grouping_config():
     groupings = {}
@@ -106,9 +112,22 @@ def send_service_call(request):
     assert isinstance(request, HttpRequest)
     
     if request.is_ajax() and request.method == 'POST':
-        # ImplServiceCall
         body = request.body
-        print(json.loads(request.body.decode('utf-8')))
+        decoded_body = body.decode('utf-8')
+        json_body = json.loads(decoded_body)
+
+        # Python 3.0 - 3.5 Windows Console Bug! Need to parse and re-encode!
+        # print(str(json_body).encode('utf-8'))
+
+        message = json_body['message']
+        display = json_body['messageOptions']['display']
+        duration = json_body['messageOptions']['duration'] if display.lower() == 'toast' else None
+
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        for box in json_body['addresses']:
+            if box in mapper.mac_ip_map:
+                sock.sendto(b'PASS_MSG/!!/' + bytes(display.upper(), 'utf-8') + b'/!!/' + bytes(message, 'utf-8') + b'/!!/' + bytes(str(duration) if duration else '0', 'utf-8'), (mapper.mac_ip_map.get(box), client_listening_port))
+               
         return HttpResponse("OK")
 
 

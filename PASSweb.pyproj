@@ -57,6 +57,9 @@
     <Compile Include="PASSweb\wsgi.py" />
     <Compile Include="web\admin.py" />
     <Compile Include="web\apps.py" />
+    <Compile Include="web\mapping_server.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="web\migrations\__init__.py" />
     <Compile Include="web\models.py" />
     <Compile Include="web\tests.py" />
