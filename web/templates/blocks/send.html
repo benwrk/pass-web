@@ -27,14 +27,14 @@
                             </select>
                         {% endif %}
                     </div>
-                    <div class="col-md-7" style="padding-top: 10px;">
+                    <div class="col-md-5" style="padding-top: 10px;">
                         <label for="message-input">Message</label>
                         <textarea id="message-input" type="text" class="form-control" placeholder="Enter message..."></textarea>
                     </div>
-                    <div class="col-md-5" style="padding-top: 10px;">
+                    <div class="col-md-7" style="padding-top: 10px;">
                         <label for="message-options">Options</label>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="message-show-as">Show as</label><br />
                                 <div class="input-group">
                                     <div class="btn-group btn-group-justified btn-group-sm" id="message-show-as" data-toggle="buttons">
@@ -47,11 +47,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="message-show-time">Show for (Toast only)</label><br />
                                 <div class="input-group input-group-sm" id="message-show-time">
                                     <input id="message-show-for" class="form-control" type="number" max="15" placeholder="1-15 seconds  (default: 10)" />
                                     <span class="input-group-addon">seconds</span>                                        
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <br />
+                                <div class="btn-group btn-group-justified btn-group-sm">
+                                    <button type="button" class="btn btn-danger" onclick="window.location.href = '{% url 'home' %}'" style="margin-right: 4px;">Cancel</button>
+                                    <button type="button" class="btn btn-primary" onclick="send()">Send!</button>
                                 </div>
                             </div>
                         </div>
