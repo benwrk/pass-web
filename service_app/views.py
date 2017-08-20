@@ -1,41 +1,44 @@
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from service_app.models import Floor, Group, Ward, Box
+from service_app.models import Floor
 from service_app.serializers import FloorSerializer
+from django.http import Http404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
-@api_view(['GET', 'POST'])
-def floor_list(request, format=None):
-    if request.method == 'GET':
+class FloorList(APIView):
+    def get(self, request, format=None):
         floors = Floor.objects.all()
         serializer = FloorSerializer(floors, many=True)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
+    def post(self, request, format=None):
         serializer = FloorSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def floor_detail(request, pk, format=None):
-    try:
-        floor = Floor.objects.get(pk=pk)
-    except Floor.DoesNotExist:
-        return HttpResponse(status=404)
+class FloorDetail(APIView):
+    def get_object(self, pk):
+        try:
+            return Floor.objects.get(pk=pk)
+        except Snippet.DoesNotExist:
+            raise Http404
 
-    if request.method == 'GET':
+    def get(self, request, pk, format=None):
+        floor = self.get_object(pk)
         serializer = FloorSerializer(floor)
         return Response(serializer.data)
 
-    elif request.method == 'PUT':
+    def put(self, request, pk, format=None):
+        floor = self.get_object(pk)
         serializer = FloorSerializer(floor, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    elif request.method == 'DELETE':
+    def delete(self, request, pk, format=None):
+        floor = self.get_object(pk)
         floor.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
