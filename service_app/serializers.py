@@ -1,10 +1,29 @@
 from rest_framework import serializers
 from service_app.models import Floor, Group, Ward, Box
 
+class BoxSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Box
+        fields = '__all__'
+
+class WardSerializer(serializers.ModelSerializer):
+    boxes = BoxSerializer(many=True)
+    class Meta:
+        model = Ward
+        fields = '__all__'
+
+class GroupSerializer(serializers.ModelSerializer):
+    wards = WardSerializer(many=True)
+    class Meta:
+        model = Group
+        fields = '__all__'
+
 class FloorSerializer(serializers.ModelSerializer):
+    groups = GroupSerializer(many=True)
     class Meta:
         model = Floor
-        fields = ('id', 'name')
+        fields = '__all__'
+
     #id = serializers.IntegerField(read_only=True)
     #name = serializers.CharField(required=True)
     ##groups = GroupSerializer(many=True)
