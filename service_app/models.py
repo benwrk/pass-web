@@ -22,7 +22,7 @@ class Ward(models.Model):
 
 class Box(models.Model):
     name = models.CharField(max_length=50)
-    mac_address = models.CharField(max_length=12)
+    mac_address = models.CharField(max_length=12, unique=True)
     ward = models.ForeignKey(Ward, on_delete=models.CASCADE)
 
     def __str__(self):

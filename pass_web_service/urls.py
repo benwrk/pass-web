@@ -15,10 +15,12 @@ router = routers.DefaultRouter()
 # admin.autodiscover()
 
 urlpatterns = [
-    url(r'^pass-api/', include([
-        url(r'^', include(router.urls)),
-        url(r'^auth/', include('rest_framework.urls', namespace='rest_framework'))
-    ])),
+    url(r'^', include('service_app.urls'))
+
+    #url(r'^pass-api/', include([
+    #    url(r'^', include(router.urls)),
+    #    url(r'^auth/', include('rest_framework.urls', namespace='rest_framework'))
+    #])),
 
     # Examples:
 
