@@ -1,27 +1,25 @@
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from service_app.models import Floor, Group, Ward, Box
 from service_app.serializers import FloorSerializer
 
-@csrf_exempt
-def floor_list(request):
+@api_view(['GET', 'POST'])
+def floor_list(request, format=None):
     if request.method == 'GET':
         floors = Floor.objects.all()
-        serializer = FloorSerializer(floor, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        serializer = FloorSerializer(floors, many=True)
+        return Response(serializer.data)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = FloorSerializer(data=data)
+        serializer = FloorSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@csrf_exempt
-def floor_detail(request, pk):
+@api_view(['GET', 'PUT', 'DELETE'])
+def floor_detail(request, pk, format=None):
     try:
         floor = Floor.objects.get(pk=pk)
     except Floor.DoesNotExist:
@@ -29,16 +27,15 @@ def floor_detail(request, pk):
 
     if request.method == 'GET':
         serializer = FloorSerializer(floor)
-        return JsonResponse(serializer.data)
+        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = FloorSerializer(floor, data=data)
+        serializer = FloorSerializer(floor, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         floor.delete()
-        return HttpResponse(status=204)
+        return Response(status=status.HTTP_204_NO_CONTENT)
