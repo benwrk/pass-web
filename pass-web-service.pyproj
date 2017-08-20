@@ -41,6 +41,13 @@
     <Compile Include="pass_web_service\settings.py" />
     <Compile Include="pass_web_service\urls.py" />
     <Compile Include="pass_web_service\wsgi.py" />
+    <Compile Include="service_app\admin.py" />
+    <Compile Include="service_app\apps.py" />
+    <Compile Include="service_app\migrations\__init__.py" />
+    <Compile Include="service_app\models.py" />
+    <Compile Include="service_app\tests.py" />
+    <Compile Include="service_app\views.py" />
+    <Compile Include="service_app\__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
@@ -53,6 +60,8 @@
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="pass_web_service\" />
+    <Folder Include="service_app\" />
+    <Folder Include="service_app\migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
