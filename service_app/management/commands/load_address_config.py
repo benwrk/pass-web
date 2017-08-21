@@ -8,14 +8,14 @@ class Command(BaseCommand):
         parser.add_argument('file', type=argparse.FileType('r'))
 
     def handle(self, *args, **options):
-        print('[Management] Clearing address configs from DB...')
+        print('[AddressLoader] Clearing address configs from DB...')
         Floor.objects.all().delete()
         Group.objects.all().delete()
         Ward.objects.all().delete()
         Box.objects.all().delete()
 
         with (options['file']) as config_file:
-            print('[Management] Loading address configs from ' + config_file.name)
+            print('[AddressLoader] Loading address configs from ' + config_file.name)
             config_json = json.load(config_file)
             for floor in config_json['floors']:
                 f = Floor(name=floor['name'])
@@ -30,6 +30,4 @@ class Command(BaseCommand):
                             b = Box(name=box['name'], mac_address=box['mac_address'], ward=w)
                             b.save()
 
-            print('[Management] Finished loading config file ' + config_file.name)
-
-                    
+            print('[AddressLoader] Finished loading config file ' + config_file.name)

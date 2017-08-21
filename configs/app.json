@@ -1,0 +1,5 @@
+{
+  "type": "app-config",
+  "address_config_file": "configs/addresses.json",
+  "port": "80" 
+}

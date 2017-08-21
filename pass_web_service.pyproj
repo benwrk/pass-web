@@ -38,7 +38,10 @@
     <Compile Include="pass_web_service\wsgi.py" />
     <Compile Include="service_app\admin.py" />
     <Compile Include="service_app\apps.py" />
-    <Compile Include="service_app\management\commands\read_grouping_configs.py" />
+    <Compile Include="service_app\management\commands\load_address_config.py" />
+    <Compile Include="service_app\management\commands\start_service.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="service_app\models.py" />
     <Compile Include="service_app\serializers.py">
       <SubType>Code</SubType>
@@ -49,16 +52,23 @@
     </Compile>
     <Compile Include="service_app\views.py" />
     <Compile Include="service_app\__init__.py" />
+    <Compile Include="setup.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="configs\" />
     <Folder Include="pass_web_service\" />
     <Folder Include="service_app\" />
     <Folder Include="service_app\management\" />
     <Folder Include="service_app\management\commands\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="configs\addresses.json" />
+    <Content Include="configs\app.json">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="requirements.txt" />
-    <Content Include="db.sqlite3" />
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.html">
