@@ -34,10 +34,12 @@ class Message(models.Model):
         ('p', 'popup'),
         ('w', 'welcome')
     )
+
     created = models.DateTimeField(auto_now_add=True)
     message = models.CharField(max_length=200)
-    type = models.CharField(max_length=1, choices=MESSAGE_TYPE_CHOICES)
     send_to = models.ManyToManyField(Box)
+    sender = models.CharField(max_length=50, blank=True)
+    type = models.CharField(max_length=1, choices=MESSAGE_TYPE_CHOICES)
 
     def __str__(self):
-        return self.message
+        return '[' + self.type + '|' + self.sender + '|' + self.created + '] ' + self.message
