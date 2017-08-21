@@ -1,6 +1,18 @@
+from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from service_app.models import Floor, Group, Ward, Box
 from service_app.serializers import FloorSerializer, GroupSerializer, WardSerializer, BoxSerializer
-from rest_framework import generics
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'floors': reverse('floor-list', request=request, format=format),
+        'groups': reverse('group-list', request=request, format=format),
+        'wards': reverse('ward-list', request=request, format=format),
+        'boxes': reverse('box-list', request=request, format=format)
+    })
 
 class FloorList(generics.ListCreateAPIView):
     queryset = Floor.objects.all()
