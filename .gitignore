@@ -256,3 +256,6 @@ __pycache__
 
 # Django Static Files
 /static
+
+# Django Migrations
+migrations/
