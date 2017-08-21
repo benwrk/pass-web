@@ -19,6 +19,9 @@ class Command(BaseCommand):
             config = json.load(config_file)
             print('[ConfigLoad] ' + json.dumps(config))
 
-            execute_from_command_line(['manage.py', 'load_address_config', os.path.join(BASE_DIR, config['address_config_file'])])
+            if config['address_opmode'] == 'read-from-file':
+                print('[ConfigLoad] Configuration says Addressing OpMode is to read from file, now reading from file...')
+                execute_from_command_line(['manage.py', 'load_address_config', os.path.join(BASE_DIR, config['address_config_file'])])
+
             execute_from_command_line(['manage.py', 'runserver', '0.0.0.0:' + config['port']])
 
