@@ -2,24 +2,24 @@ from rest_framework import serializers
 from service_app.models import Floor, Group, Ward, Box
 
 
-class BoxSerializer(serializers.ModelSerializer):
+class BoxSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Box
         fields = '__all__'
 
-class WardSerializer(serializers.ModelSerializer):
+class WardSerializer(serializers.HyperlinkedModelSerializer):
     boxes = BoxSerializer(many=True)
     class Meta:
         model = Ward
         fields = '__all__'
 
-class GroupSerializer(serializers.ModelSerializer):
+class GroupSerializer(serializers.HyperlinkedModelSerializer):
     wards = WardSerializer(many=True)
     class Meta:
         model = Group
         fields = '__all__'
 
-class FloorSerializer(serializers.ModelSerializer):
+class FloorSerializer(serializers.HyperlinkedModelSerializer):
     groups = GroupSerializer(many=True)
     class Meta:
         model = Floor
