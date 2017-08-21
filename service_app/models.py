@@ -36,6 +36,7 @@ class Message(models.Model):
     )
 
     created = models.DateTimeField(auto_now_add=True)
+    duration = models.PositiveIntegerField()
     message = models.CharField(max_length=200)
     send_to = models.ManyToManyField(Box, related_name='messages')
     sender = models.CharField(max_length=50, blank=True)
@@ -51,4 +52,4 @@ class Message(models.Model):
             while len(Message.objects.all()) > 10000:
                 message[0].delete()
         else:
-            raise IOError('Unable to send message!')
+            raise IOError('Unable to send message! Check discovery service configurations.')

@@ -2,5 +2,5 @@
   "type": "app-config",
   "address_opmode": "read-from-file",
   "address_config_file": "configs/addresses.json",
-  "port": "80" 
+  "ws_port": "80" 
 }

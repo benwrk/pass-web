@@ -23,5 +23,5 @@ class Command(BaseCommand):
                 print('[ConfigLoad] Configuration says Addressing OpMode is to read from file, now reading from file...')
                 execute_from_command_line(['manage.py', 'load_address_config', os.path.join(BASE_DIR, config['address_config_file'])])
 
-            execute_from_command_line(['manage.py', 'runserver', '0.0.0.0:' + config['port']])
+            execute_from_command_line(['manage.py', 'runserver', '0.0.0.0:' + config['ws_port']])
 
