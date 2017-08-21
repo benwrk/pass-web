@@ -38,6 +38,7 @@
     <Compile Include="pass_web_service\wsgi.py" />
     <Compile Include="service_app\admin.py" />
     <Compile Include="service_app\apps.py" />
+    <Compile Include="service_app\management\commands\read_grouping_configs.py" />
     <Compile Include="service_app\models.py" />
     <Compile Include="service_app\serializers.py">
       <SubType>Code</SubType>
@@ -52,6 +53,8 @@
   <ItemGroup>
     <Folder Include="pass_web_service\" />
     <Folder Include="service_app\" />
+    <Folder Include="service_app\management\" />
+    <Folder Include="service_app\management\commands\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
