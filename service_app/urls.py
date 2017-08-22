@@ -11,8 +11,7 @@ router.register(r'boxes', views.BoxViewSet)
 router.register(r'messages', views.MessageViewSet)
 
 urlpatterns = [
-    url(r'^clients/', include(router.urls)),
-    url(r'^messaging/', include(router.urls)),
+    url(r'^', include(router.urls)),
     url(r'^schema/$', get_schema_view(title='PASS Web Service')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

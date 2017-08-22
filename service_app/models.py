@@ -1,4 +1,5 @@
 from django.db import models
+from service_app.messaging.message_dispatcher import MessageDispatcher
 
 class Floor(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -30,9 +31,9 @@ class Box(models.Model):
 
 class Message(models.Model):
     MESSAGE_TYPE_CHOICES = (
-        ('t', 'toast'),
-        ('p', 'popup'),
-        ('w', 'welcome')
+        ('TOAST', 'Toast'),
+        ('POPUP', 'Pop-up'),
+        ('WELCM', 'Welcome')
     )
 
     created = models.DateTimeField(auto_now_add=True)
@@ -43,13 +44,10 @@ class Message(models.Model):
     type = models.CharField(max_length=1, choices=MESSAGE_TYPE_CHOICES)
 
     def __str__(self):
-        return '[' + self.type + '|' + self.sender + '|' + self.created + '] ' + self.message
+        return self.message
 
     def save(self, *args, **kwargs):
-        if send_message_to_clients(self):
-            super(Message, self).save(*args, **kwargs)
-        
-            while len(Message.objects.all()) > 10000:
-                message[0].delete()
-        else:
-            raise IOError('Unable to send message! Check discovery service configurations.')
+        super(Message, self).save(*args, **kwargs)
+
+        while len(Message.objects.all()) > 10000:
+            message[0].delete()

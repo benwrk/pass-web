@@ -45,6 +45,12 @@
     <Compile Include="service_app\messaging\discovery_service.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="service_app\messaging\message_dispatcher.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="service_app\messaging\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="service_app\models.py" />
     <Compile Include="service_app\serializers.py">
       <SubType>Code</SubType>
@@ -58,11 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="configs\" />
-    <Folder Include="messaging\" />
     <Folder Include="pass_web_service\" />
     <Folder Include="service_app\" />
     <Folder Include="service_app\management\" />
     <Folder Include="service_app\management\commands\" />
+    <Folder Include="service_app\messaging\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="configs\addresses.json" />

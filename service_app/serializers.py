@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from service_app.models import Floor, Group, Ward, Box, Message
 
-
 class BoxSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Box
