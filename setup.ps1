@@ -3,3 +3,4 @@ Start-Process python.exe -ArgumentList '-m pip install virtualenv --no-cache-dir
 virtualenv env;
 env\Scripts\activate;
 pip install -r requirements.txt --no-cache-dir;
+python.exe manage.py makemigrations service_app;
