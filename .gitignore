@@ -254,5 +254,8 @@ env3/
 *.pyc
 __pycache__
 
-% Django Static Files
+# Django Static Files
 /static
+
+# Django Migrations
+migrations/
