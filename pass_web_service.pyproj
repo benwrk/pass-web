@@ -75,7 +75,11 @@
     <Content Include="configs\app.json">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="setup.bat" />
     <Content Include="requirements.txt" />
+    <Content Include="setup.ps1" />
+    <Content Include="start.bat" />
+    <Content Include="start.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
