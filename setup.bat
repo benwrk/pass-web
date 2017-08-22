@@ -1,2 +1,2 @@
-powershell -file get-elevation.ps1
+powershell -File setup.ps1
 pause
