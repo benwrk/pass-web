@@ -41,7 +41,7 @@ class Message(models.Model):
     message = models.CharField(max_length=200)
     send_to = models.ManyToManyField(Box, related_name='messages')
     sender = models.CharField(max_length=50, blank=True)
-    type = models.CharField(max_length=1, choices=MESSAGE_TYPE_CHOICES)
+    type = models.CharField(max_length=5, choices=MESSAGE_TYPE_CHOICES)
 
     def __str__(self):
         return self.message
