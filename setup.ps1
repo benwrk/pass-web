@@ -1,6 +1,13 @@
-Remove-Item -Recurse -Force env;
-Start-Process python.exe -ArgumentList '-m pip install virtualenv --no-cache-dir' -Verb RunAs -Wait;
-virtualenv env;
+Write-Output "[SetupScript] Removing existing virtual environment...";
+Get-Item * -Include env | Remove-Item -Recurse -Force;
+Write-Output "[SetupScript] Installing virtual environment...";
+Start-Process python.exe -ArgumentList '-m pip install virtualenv --no-cache-dir' -Wait -Verb RunAs;
+Write-Output "[SetupScript] Creating virtual environment...";
+Start-Process virtualenv -ArgumentList 'env' -Wait -NoNewWindow;
+Write-Output "[SetupScript] Activating virtual environment...";
 env\Scripts\activate;
-pip install -r requirements.txt --no-cache-dir;
-python.exe manage.py makemigrations service_app;
+Write-Output "[SetupScript] Installing packages...";
+Start-Process pip -ArgumentList 'install -r requirements.txt --no-cache-dir' -Wait -NoNewWindow;
+Write-Output "[SetupScript] Making Django migrations...";
+Start-Process python.exe -ArgumentList 'manage.py makemigrations service_app' -Wait -NoNewWindow;
+Write-Output "[SetupScript] Setup completed...";
